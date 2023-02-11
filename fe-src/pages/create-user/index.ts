@@ -1,9 +1,7 @@
 import { Router } from "@vaadin/router"
-import { state } from "../../state"
 
-export class Login extends HTMLElement {
+export class Create extends HTMLElement {
   connectedCallback() {
-
     this.render()
   }
   render() {
@@ -12,7 +10,7 @@ export class Login extends HTMLElement {
 
     style.textContent = `
     @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
-        .login{
+        .formCreate{
             display:flex;
             flex-direction:column;
             align-items:center;
@@ -21,26 +19,26 @@ export class Login extends HTMLElement {
         }
         .form{
             width:300px;
-            height:300px;
+            height:335px;
             padding:30px;
           background-color:hsl(48, 100%, 96%);
           border-radius:30px;
           
         }
-        .title{
-          font-size:24px;
-        }
+      .title{
+        font-size:24px;
+      }
         `
     this.appendChild(style)
     div.innerHTML = `
     <header-custom></header-custom>
-    <div class="login">
-    <h1 class="title">Ingresar</h1>
+    <div class="formCreate">
+    <h1 class="title">crear cuenta</h1>
         <form class="form box">
         <div class="field">
           <label class="label is-white">Email</label>
           <p class="control has-icons-left">
-            <input class="input is-rounded" type="email" placeholder="ingresar email" name="email"/>
+            <input class="input is-rounded" type="email" placeholder="ingresa un email" name="email"/>
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
@@ -49,7 +47,14 @@ export class Login extends HTMLElement {
         <div class="field">
           <label class="label">Contraseña</label>
           <p class="control has-icons-left">
-            <input class="input is-rounded" type="password" placeholder="Password" name="password"/>
+            <input class="input is-rounded" type="password" placeholder="Crear contraseña" name="password"/>
+            <span class="icon is-small is-left">
+              <i class="fas fa-lock"></i>
+            </span>
+          </p>
+          <label class="label">Repetir contraseña</label>
+          <p class="control has-icons-left">
+            <input class="input is-rounded" type="password" placeholder="Repite la contraseña" name="password"/>
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -58,13 +63,12 @@ export class Login extends HTMLElement {
         <div class="field">
         <p class="control">
           <button class="button is-success is-fullwidth">
-            Login
+            Guardar
           </button>
         </p>
       </div>
       </form>
-      <h2>no tienes una cuenta?</h2>
-      <a class="link__crear-cuenta" >crear cuenta</a>
+   
     </div>
         `
 
@@ -77,11 +81,8 @@ export class Login extends HTMLElement {
       const password = target.password.value
       console.log(email, password);
     })
-    const crear = div.querySelector(".link__crear-cuenta")
-    crear?.addEventListener("click", () => {
-      Router.go("/create-user")
-    })
+
     this.appendChild(div)
   }
 }
-customElements.define("login-page", Login)
+customElements.define("create-page", Create)

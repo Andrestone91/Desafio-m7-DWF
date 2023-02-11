@@ -1,5 +1,11 @@
+const API_BASE_URL = "http://localhost:3000"
+
 const state = {
     data: {
+        user: {
+            name: "",
+            password: "",
+        },
         lng: "",
         lat: "",
         algoliaData: []
@@ -28,7 +34,7 @@ const state = {
 
     async loadPets(callback?) {
         const cs = state.getState()
-        await fetch("http://localhost:3000/close-to-me?lat=" + cs.lat + "&lng=" + cs.lng
+        await fetch(API_BASE_URL + "/close-to-me?lat=" + cs.lat + "&lng=" + cs.lng
         ).then(res => {
             return res.json();
         }).then(data => {
@@ -36,6 +42,9 @@ const state = {
             console.log(data);
             callback()
         })
+    },
+    suscribe(callback: (any) => any) {
+        this.listeners.push(callback)
     },
 }
 export { state }
