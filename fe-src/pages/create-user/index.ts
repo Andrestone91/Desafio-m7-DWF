@@ -1,4 +1,5 @@
 import { Router } from "@vaadin/router"
+import { state } from "../../state"
 
 export class Create extends HTMLElement {
   connectedCallback() {
@@ -19,7 +20,7 @@ export class Create extends HTMLElement {
         }
         .form{
             width:300px;
-            height:335px;
+            height:420px;
             padding:30px;
           background-color:hsl(48, 100%, 96%);
           border-radius:30px;
@@ -35,6 +36,15 @@ export class Create extends HTMLElement {
     <div class="formCreate">
     <h1 class="title">crear cuenta</h1>
         <form class="form box">
+        <div class="field">
+          <label class="label is-white">Nombre</label>
+          <p class="control has-icons-left">
+            <input class="input is-rounded" type="text" placeholder="tu nombre" name="nombre"/>
+            <span class="icon is-small is-left">
+              <i class="fas fa-user"></i>
+            </span>
+          </p>
+        </div>
         <div class="field">
           <label class="label is-white">Email</label>
           <p class="control has-icons-left">
@@ -54,7 +64,7 @@ export class Create extends HTMLElement {
           </p>
           <label class="label">Repetir contraseña</label>
           <p class="control has-icons-left">
-            <input class="input is-rounded" type="password" placeholder="Repite la contraseña" name="password"/>
+            <input class="input is-rounded" type="password" placeholder="Repite la contraseña" name="repeatPassword"/>
             <span class="icon is-small is-left">
               <i class="fas fa-lock"></i>
             </span>
@@ -77,9 +87,18 @@ export class Create extends HTMLElement {
     form?.addEventListener("submit", (e) => {
       e.preventDefault()
       const target = e.target as any;
+      const nombre = target.nombre.value;
       const email = target.email.value;
       const password = target.password.value
-      console.log(email, password);
+      const repeatPassword = target.repeatPassword.value
+      if (password !== repeatPassword) {
+        window.alert("la contraseña tiene que coincidir")
+      }
+      if (password == repeatPassword) {
+        state.singUp(nombre, email, password, () => {
+          Router.go("/")
+        })
+      }
     })
 
     this.appendChild(div)

@@ -68,7 +68,7 @@ export class Login extends HTMLElement {
     </div>
         `
 
-
+    //signin
     const form = div.querySelector(".form")
     form?.addEventListener("submit", (e) => {
       e.preventDefault()
@@ -77,6 +77,8 @@ export class Login extends HTMLElement {
       const password = target.password.value
       console.log(email, password);
     })
+
+    //crear cuenta
     const crear = div.querySelector(".link__crear-cuenta")
     crear?.addEventListener("click", () => {
       Router.go("/create-user")

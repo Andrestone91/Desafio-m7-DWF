@@ -4,6 +4,7 @@ const state = {
     data: {
         user: {
             name: "",
+            email: "",
             password: "",
         },
         lng: "",
@@ -41,6 +42,31 @@ const state = {
             cs.algoliaData = data
             console.log(data);
             callback()
+        })
+    },
+
+    async singUp(name, email, password, callback) {
+        const cs = this.getState()
+
+        await fetch(API_BASE_URL + "/auth", {
+            method: "post",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({ name, email, password })
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            console.log("postgreSQL", data);
+            if (data.userCreated == false) {
+                window.alert("el email ya esta registrado")
+            } else {
+                cs.user.name = data.user.name
+                cs.user.email = data.user.email
+                cs.user.password = data.auth.password
+                this.setState(cs)
+                callback()
+            }
         })
     },
     suscribe(callback: (any) => any) {

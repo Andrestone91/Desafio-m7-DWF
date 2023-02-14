@@ -1,5 +1,4 @@
 import { User, Pet, Auth } from "../models"
-
 import * as crypto from "crypto"
 
 function getSHA256ofString(text: string) {
@@ -7,7 +6,7 @@ function getSHA256ofString(text: string) {
 }
 
 export async function findOrCreateUser(name, email, password) {
-    const [user, created] = await User.findOrCreate({
+    const [user, userCreated] = await User.findOrCreate({
         where: { email: email },
         defaults: {
             name
@@ -20,6 +19,6 @@ export async function findOrCreateUser(name, email, password) {
             password: getSHA256ofString(password),
         }
     })
-    return { authCreated, auth }
+    return { userCreated, user, authCreated, auth }
 }
 
