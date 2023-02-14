@@ -4,7 +4,8 @@
   "license": "MIT",
   "scripts": {
     "dev:fe": "parcel serve ./fe-src/index.html",
-    "dev:be": "nodemon --watch ./be-src/**/*.ts  --exec ts-node ./be-src/index.ts"
+    "dev:be": "nodemon --watch ./be-src/**/*.ts  --exec ts-node ./be-src/index.ts",
+    "sync": "ts-node ./be-src/sync.ts"
   },
   "dependencies": {
     "@vaadin/router": "^1.7.4",
