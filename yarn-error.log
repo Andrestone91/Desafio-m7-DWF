@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\andre\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add sequelize
+  C:\Program Files\nodejs\node.exe C:\Users\andre\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add jsonwebtoken
 
 PATH: 
   C:\Users\andre\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\andre\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0;C:\Windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\andre\AppData\Local\Microsoft\WindowsApps;C:\adb;C:\Program Files\Git\cmd;C:\Program Files\dotnet;C:\Program Files\nodejs;C:\Users\andre\AppData\Roaming\npm;C:\Users\andre\AppData\Local\Microsoft\WindowsApps;C:\Users\andre\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\andre\AppData\Roaming\npm;C:\Program Files\heroku\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
@@ -23,7 +23,8 @@ npm manifest:
     "license": "MIT",
     "scripts": {
       "dev:fe": "parcel serve ./fe-src/index.html",
-      "dev:be": "nodemon --watch ./be-src/**/*.ts  --exec ts-node ./be-src/index.ts"
+      "dev:be": "nodemon --watch ./be-src/**/*.ts  --exec ts-node ./be-src/index.ts",
+      "sync": "ts-node ./be-src/sync.ts"
     },
     "dependencies": {
       "@vaadin/router": "^1.7.4",

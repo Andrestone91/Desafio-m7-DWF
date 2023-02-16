@@ -72,10 +72,18 @@ export class Login extends HTMLElement {
     const form = div.querySelector(".form")
     form?.addEventListener("submit", (e) => {
       e.preventDefault()
+      const cs = state.getState();
       const target = e.target as any;
       const email = target.email.value;
-      const password = target.password.value
-      console.log(email, password);
+      const password = target.password.value;
+      state.signin(email, password, () => {
+        if (cs.lng == "") {
+          Router.go("/")
+        }
+        if (cs.lng !== "") {
+          Router.go("/lost-pets")
+        }
+      })
     })
 
     //crear cuenta

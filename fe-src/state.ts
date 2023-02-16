@@ -6,6 +6,7 @@ const state = {
             name: "",
             email: "",
             password: "",
+            token: ""
         },
         lng: "",
         lat: "",
@@ -45,9 +46,7 @@ const state = {
         })
     },
 
-    async singUp(name, email, password, callback) {
-        const cs = this.getState()
-
+    async signUp(name, email, password, callback) {
         await fetch(API_BASE_URL + "/auth", {
             method: "post",
             headers: {
@@ -58,17 +57,40 @@ const state = {
             return res.json()
         }).then(data => {
             console.log("postgreSQL", data);
-            if (data.userCreated == false) {
+            if (data.error) {
                 window.alert("el email ya esta registrado")
-            } else {
-                cs.user.name = data.user.name
-                cs.user.email = data.user.email
+            }
+            else {
+                callback()
+            }
+        })
+    },
+
+    async signin(email, password, callback) {
+        const cs = this.getState()
+        await fetch(API_BASE_URL + "/auth/token", {
+            method: "post",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            if (data.message) {
+                window.alert("datos incorrectos")
+            }
+            else {
+                cs.user.name = data.user.name;
+                cs.user.email = data.user.email;
                 cs.user.password = data.auth.password
+                cs.user.token = data.token
                 this.setState(cs)
                 callback()
             }
         })
     },
+
     suscribe(callback: (any) => any) {
         this.listeners.push(callback)
     },

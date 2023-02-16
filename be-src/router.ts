@@ -5,5 +5,6 @@ router.setRoutes([
     { path: '/', component: 'welcome-page' },
     { path: '/login', component: 'login-page' },
     { path: '/create-user', component: 'create-page' },
+    { path: '/my-user', component: 'data-page' },
     { path: '/lost-pets', component: 'lost-page' },
 ]);

@@ -2,7 +2,7 @@ import * as express from "express"
 import * as path from "path"
 import * as cors from "cors"
 import { index } from "./lib/algolia"
-import { findOrCreateUser } from "./controllers/users-controller"
+import { findOrCreateUser, tk } from "./controllers/users-controller"
 
 const app = express()
 const port = 3000
@@ -31,12 +31,29 @@ app.get("/test", async (req, res) => {
     res.json({ funciona: "ok" })
 })
 
-//singup
+//signup
 app.post("/auth", async (req, res) => {
     const { name, email, password } = req.body;
     const findUser = await findOrCreateUser(name, email, password)
-    res.json(findUser)
+    if (findUser.message) {
+        res.status(404).json({
+            error: "el usuario ya existe"
+        })
+    } else {
+        res.json(findUser)
+    }
 
+})
+//signin
+app.post("/auth/token", async (req, res) => {
+    const { email, password } = req.body;
+    const authToken = await tk(email, password)
+    if (authToken.message) {
+        res.status(404).json(authToken)
+    }
+    if (authToken.token) {
+        res.status(200).json(authToken)
+    }
 })
 
 app.get("/close-to-me", async (req, res) => {

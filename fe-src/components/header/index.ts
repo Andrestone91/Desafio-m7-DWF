@@ -115,7 +115,7 @@ export class Header extends HTMLElement {
 
         Router.go("/login")
       } else {
-        console.log("hay user");
+        Router.go("/my-user")
       }
 
     })

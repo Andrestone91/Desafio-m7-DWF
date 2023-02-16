@@ -86,6 +86,7 @@ export class Create extends HTMLElement {
     const form = div.querySelector(".form")
     form?.addEventListener("submit", (e) => {
       e.preventDefault()
+      const cs = state.getState()
       const target = e.target as any;
       const nombre = target.nombre.value;
       const email = target.email.value;
@@ -95,8 +96,16 @@ export class Create extends HTMLElement {
         window.alert("la contraseña tiene que coincidir")
       }
       if (password == repeatPassword) {
-        state.singUp(nombre, email, password, () => {
-          Router.go("/")
+        state.signUp(nombre, email, password, () => {
+          state.signin(email, password, () => {
+
+            if (cs.lng == "") {
+              Router.go("/")
+            }
+            if (cs.lng !== "") {
+              Router.go("/lost-pets")
+            }
+          })
         })
       }
     })
