@@ -45,3 +45,14 @@ export async function tk(email, password, created?) {
         return { message: "email or password incorrect" }
     }
 }
+export function authMiddleware(req, res, next) {
+    const token = req.headers.authorization.split(" ")[1]
+    try {
+        const data = jwt.verify(token, SECRET)
+        req._user = data
+        next()
+    } catch {
+        res.status(401).json({ error: "you are not authorized" })
+    }
+}
+

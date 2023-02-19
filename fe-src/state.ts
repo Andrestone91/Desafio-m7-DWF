@@ -71,7 +71,7 @@ const state = {
         await fetch(API_BASE_URL + "/auth/token", {
             method: "post",
             headers: {
-                "content-type": "application/json"
+                "content-type": "application/json",
             },
             body: JSON.stringify({ email, password })
         }).then(res => {
@@ -90,7 +90,9 @@ const state = {
             }
         })
     },
-
+    async me() {
+        await fetch
+    },
     suscribe(callback: (any) => any) {
         this.listeners.push(callback)
     },

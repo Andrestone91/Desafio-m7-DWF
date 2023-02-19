@@ -66,7 +66,7 @@ export class Header extends HTMLElement {
     this.appendChild(style)
     div.innerHTML = `
       
-      <img src=${imgLogo}>
+      <img  src=${imgLogo}>
       
      
       <button class="boton-menu"></button>
@@ -74,19 +74,23 @@ export class Header extends HTMLElement {
           <button class="boton-menu__cierre">cruz</button>
           <img class="img" src=${imgCruz}>
             <div class="ventana__contenido">
+              <a class="ventana__text inicio"href="">Inicio</a>
               <a class="ventana__text user"href="">Mis datos</a>
               <a class="ventana__text"href="">Mis mascotas <br> reportadas</a>
-              <a class="ventana__text"href="">Reportar <br> mascota</a>
+              <a class="ventana__text"href="">Reportar mascota</a>
             </div>
          </div>
       <img src=${imgMenu}>
       
         `
     div.classList.add("contenedor")
+
     const loginEl = document.querySelector(".login") as any
     const formCreateEl = document.querySelector(".formCreate") as any
     const botonEl = div.querySelector(".boton-menu")
     const botonCierreEl = div.querySelector(".boton-menu__cierre")
+    const menuEl = div.querySelector(".ventana__contenido")?.children as any
+    const inicioEl = div.querySelector(".inicio")
     const userEl = div.querySelector(".user")
     const ventanaEl = div.querySelector(".ventana") as any
 
@@ -110,15 +114,39 @@ export class Header extends HTMLElement {
       }
 
     })
-    userEl?.addEventListener("click", () => {
-      if (cs.user.name == "") {
+    for (const m of menuEl) {
+      m.addEventListener("click", () => {
 
-        Router.go("/login")
-      } else {
-        Router.go("/my-user")
-      }
+        if (cs.user.name == "") {
+          if (m.innerText == "Inicio") {
+            if (cs.lng == "") {
+              Router.go("/")
+            }
+            if (cs.lng !== "") {
+              Router.go("/lost-pets")
+            }
+          } else {
+            Router.go("/login")
+          }
+        }
+        if (cs.user.name !== "") {
+          if (m.innerText == "Inicio") {
+            if (cs.lng == "") {
+              Router.go("/")
+            }
+            if (cs.lng !== "") {
+              Router.go("/lost-pets")
+            }
+          }
+          else if (m.innerText == "Mis datos")
+            Router.go("/my-user")
+          else if (m.innerText == "Reportar mascota") {
+            Router.go("/new-report")
+          }
+        }
+      })
+    }
 
-    })
     this.appendChild(div)
   }
 }

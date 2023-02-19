@@ -2,7 +2,11 @@ import * as express from "express"
 import * as path from "path"
 import * as cors from "cors"
 import { index } from "./lib/algolia"
-import { findOrCreateUser, tk } from "./controllers/users-controller"
+import { User, Pet } from "./models"
+import { findOrCreateUser, tk, authMiddleware } from "./controllers/users-controller"
+import { createReport } from "./controllers/pest-controller"
+//import { sequelize } from "./models/connec"
+//sequelize.sync({ force: true })
 
 const app = express()
 const port = 3000
@@ -13,6 +17,7 @@ app.use(express.json({
 
 app.use(cors())
 
+//test
 app.get("/test", async (req, res) => {
     await index.saveObject({
         objectID: 1000,
@@ -53,9 +58,11 @@ app.post("/auth/token", async (req, res) => {
     }
     if (authToken.token) {
         res.status(200).json(authToken)
+
     }
 })
 
+//mascotas cerca
 app.get("/close-to-me", async (req, res) => {
     const { lat, lng } = req.query
     const { hits }: any = await index.search("", {
@@ -63,6 +70,28 @@ app.get("/close-to-me", async (req, res) => {
         aroundRadius: 5000
     })
     res.json(hits)
+})
+
+//yo
+app.get("/me", authMiddleware, async (req, res) => {
+    const user = await User.findByPk(req._user.id)
+    res.json(user)
+})
+
+//mis reportes
+app.get("/me/reports", authMiddleware, async (req, res) => {
+    const pets = await Pet.findAll({
+        where: { UserId: req._user.id },
+        include: [User]
+    })
+    res.json(pets)
+})
+
+//reporta mascotas
+app.post("/report", authMiddleware, async (req, res) => {
+    const { name, place, imgUrl } = req.body
+    const pet = await createReport(name, place, imgUrl, req._user.id)
+    res.json(pet)
 })
 
 app.get("*", (req, res) => {
