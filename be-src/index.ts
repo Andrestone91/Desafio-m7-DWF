@@ -89,8 +89,8 @@ app.get("/me/reports", authMiddleware, async (req, res) => {
 
 //reporta mascotas
 app.post("/report", authMiddleware, async (req, res) => {
-    const { name, place, imgUrl } = req.body
-    const pet = await createReport(name, place, imgUrl, req._user.id)
+    const { name, imgUrl, place, lat, lng } = req.body
+    const pet = await createReport(name, imgUrl, place, lat, lng, req._user.id)
     res.json(pet)
 })
 

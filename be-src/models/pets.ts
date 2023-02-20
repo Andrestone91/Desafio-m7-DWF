@@ -4,9 +4,10 @@ import { sequelize } from "./connec"
 export class Pet extends Model { }
 Pet.init({
     name: DataTypes.STRING,
-    place: DataTypes.STRING,
     imgUrl: DataTypes.STRING,
-
+    place: DataTypes.STRING,
+    lat: DataTypes.FLOAT,
+    lng: DataTypes.FLOAT
 },
     {
         sequelize,

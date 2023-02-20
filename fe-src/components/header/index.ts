@@ -76,7 +76,7 @@ export class Header extends HTMLElement {
             <div class="ventana__contenido">
               <a class="ventana__text inicio"href="">Inicio</a>
               <a class="ventana__text user"href="">Mis datos</a>
-              <a class="ventana__text"href="">Mis mascotas <br> reportadas</a>
+              <a class="ventana__text"href="">Mis mascotas reportadas</a>
               <a class="ventana__text"href="">Reportar mascota</a>
             </div>
          </div>
@@ -138,8 +138,14 @@ export class Header extends HTMLElement {
               Router.go("/lost-pets")
             }
           }
-          else if (m.innerText == "Mis datos")
+          else if (m.innerText == "Mis datos") {
             Router.go("/my-user")
+          }
+          else if (m.innerText == "Mis mascotas reportadas") {
+            state.myReports(() => {
+              Router.go("/my-reports")
+            })
+          }
           else if (m.innerText == "Reportar mascota") {
             Router.go("/new-report")
           }

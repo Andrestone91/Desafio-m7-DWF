@@ -8,9 +8,10 @@ const state = {
             password: "",
             token: ""
         },
+        myReports: [],
         lng: "",
         lat: "",
-        algoliaData: []
+        algoliaData: [],
     },
     listeners: [],
     getState() {
@@ -90,9 +91,29 @@ const state = {
             }
         })
     },
-    async me() {
-        await fetch
+
+    async myReports(callback) {
+        const cs = this.getState()
+        const token = cs.user.token
+        await fetch(API_BASE_URL + "/me/reports", {
+            method: "get",
+            headers: {
+                "Authorization": "bearer " + token
+            }
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            if (data == "") {
+                console.log("no hay reportes")
+                callback()
+            } else {
+                cs.myReports = data
+                state.setState(cs)
+                callback()
+            }
+        })
     },
+
     suscribe(callback: (any) => any) {
         this.listeners.push(callback)
     },

@@ -1,8 +1,9 @@
 import { Pet } from "../models";
+import { index } from "../lib/algolia"
 import { cloudinary } from "../lib/cloudinary";
 
-export async function createReport(name, place, imgUrl, userId) {
-    if (!name || !place || !imgUrl) {
+export async function createReport(name, imgUrl, place, lat, lng, userId) {
+    if (!name || !imgUrl || !place || !lat || !lng) {
         throw "los datos son necesarios"
     } else {
         //  const resImage = await cloudinary.uploader.upload(imgUrl, {
@@ -15,9 +16,27 @@ export async function createReport(name, place, imgUrl, userId) {
             defaults: {
                 name,
                 place,
+                lat,
+                lng,
                 UserId: userId
             }
         })
+        if (petCreated) {
+            await index.saveObject({
+                objectID: pet.get("id"),
+                name: pet.get("name"),
+                place: pet.get("place"),
+                imgUrl: pet.get("imgUrl"),
+                _geoloc: {
+                    lat: pet.get("lat"),
+                    lng: pet.get("lng")
+                }
+            }).then(res => {
+                console.log(res);
+            }).catch(e => {
+                console.log(e);
+            })
+        }
         return { petCreated, pet }
     }
 }
