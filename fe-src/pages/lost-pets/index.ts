@@ -40,7 +40,7 @@ export class LostPets extends HTMLElement {
               <div class="separar">
                   <div class="container__info">
                      <h2>${data.name}</h2>
-                      <h2>${data.location}</h2>
+                      <h2>${data.place}</h2>
                   </div>
                  <div class="container__report"
                      <h2>reportar mascota</h2>

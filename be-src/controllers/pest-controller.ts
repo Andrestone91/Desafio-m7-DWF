@@ -6,13 +6,13 @@ export async function createReport(name, imgUrl, place, lat, lng, userId) {
     if (!name || !imgUrl || !place || !lat || !lng) {
         throw "los datos son necesarios"
     } else {
-        //  const resImage = await cloudinary.uploader.upload(imgUrl, {
-        //      discard_original_filename: true,
-        //      resource_type: "image",
-        //      width: 1000,
-        //  })
+        const resImage = await cloudinary.uploader.upload(imgUrl, {
+            discard_original_filename: true,
+            resource_type: "image",
+            width: 1000,
+        })
         const [pet, petCreated] = await Pet.findOrCreate({
-            where: { imgUrl: imgUrl },
+            where: { imgUrl: resImage.secure_url },
             defaults: {
                 name,
                 place,

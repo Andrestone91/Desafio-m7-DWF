@@ -39,7 +39,9 @@ export class MyData extends HTMLElement {
                 Router.go("/")
             }
             if (cs.lng !== "") {
-                Router.go("/lost-pets")
+                state.loadPets(() => {
+                    Router.go("/lost-pets")
+                })
             }
         })
         const botonOutEl = div.querySelector(".btn-Logout")

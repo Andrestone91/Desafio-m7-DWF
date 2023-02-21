@@ -6,6 +6,8 @@ export class MyReports extends HTMLElement {
     }
     render() {
         const cs = state.getState()
+
+
         const div = document.createElement("div")
         const style = document.createElement("style")
         const shadow = this.attachShadow({ mode: "open" })
@@ -15,10 +17,20 @@ export class MyReports extends HTMLElement {
         }
         .container{
             width:365px;
-            height:200px;
+            height:250px;
             border:solid 2px;
             margin:auto;
         }
+        .container__img{
+            height: 143px;
+        }
+        .img-pets{
+            width: 100%;
+            object-fit: cover;
+            height: 100%;
+          
+        }
+        
         .separar{
             display:flex;
             justify-content: space-around;
@@ -39,7 +51,7 @@ export class MyReports extends HTMLElement {
         ${cs.myReports.map(data =>
             `<div class="container">
                 <div class="container__img">
-                     ${data.imgUrl}
+                    <img class="img-pets"src= ${data.imgUrl}>
                  </div>
               <div class="separar">
                   <div class="container__info">
@@ -47,7 +59,7 @@ export class MyReports extends HTMLElement {
                       <h2>${data.place}</h2>
                   </div>
                  <div class="container__report"
-                     <h2>reportar mascota</h2>
+                     <h2>Editar</h2>
                   </div>
               </div>
             </div>`

@@ -29,7 +29,6 @@ const state = {
         const cs = state.getState()
         cs.lat = lat
         cs.lng = lng
-        this.setState(cs)
         this.loadPets(() => {
             callback()
         })
@@ -42,8 +41,10 @@ const state = {
             return res.json();
         }).then(data => {
             cs.algoliaData = data
-            console.log(data);
-            callback()
+            this.setState(cs)
+            if (callback) {
+                callback()
+            }
         })
     },
 
@@ -111,6 +112,23 @@ const state = {
                 state.setState(cs)
                 callback()
             }
+        })
+    },
+
+    async newReport(name, imgUrl, place, lat, lng) {
+        const cs = this.getState()
+        const token = cs.user.token
+        await fetch(API_BASE_URL + "/report", {
+            method: "post",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": "bearer " + token
+            },
+            body: JSON.stringify({ name, imgUrl, place, lat, lng })
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            console.log(data);
         })
     },
 
