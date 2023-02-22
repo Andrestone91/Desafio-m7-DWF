@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev:fe": "parcel serve ./fe-src/index.html",
-    "dev:be": "nodemon --watch ./be-src/**/*.ts  --exec ts-node ./be-src/index.ts",
+    "dev:be": "nodemon --watch ./be-src/**/*.ts  --exec ts-node ./be-src/dev.ts",
     "sync": "ts-node ./be-src/sync.ts"
   },
   "dependencies": {
@@ -13,9 +13,12 @@
     "bulma": "^0.9.4",
     "cloudinary": "^1.34.0",
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "dropzone": "^6.0.0-beta.2",
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
+    "mapbox": "^1.0.0-beta10",
+    "mapbox-gl": "^2.13.0",
     "nodemon": "^2.0.20",
     "parcel": "^2.8.3",
     "pg": "^8.9.0",
@@ -24,6 +27,13 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.3",
-    "@types/node": "^18.11.18"
+    "@types/node": "^18.11.18",
+    "buffer": "^5.7.1",
+    "os-browserify": "^0.3.0",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "punycode": "^1.4.1",
+    "querystring-es3": "^0.2.1",
+    "url": "^0.11.0"
   }
 }

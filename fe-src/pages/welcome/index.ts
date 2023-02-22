@@ -9,6 +9,14 @@ export class Welcome extends HTMLElement {
         const div = document.createElement("div")
         const style = document.createElement("style")
         style.textContent = `
+        .contenedor-principal {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+          }
         .title-welcome{
             font-size:40px;
         }
@@ -18,11 +26,15 @@ export class Welcome extends HTMLElement {
         this.appendChild(style)
         div.innerHTML = `
         <header-custom></header-custom>
+        <div class="contenedor-principal">
         <h1 class="title-welcome">Mascotas perdidas cerca tuyo</h1>
         <p>Para ver las mascotas reportadas cerca tuyo necesitamos permiso para conocer tu ubicación.</p>
         <button class="btn-ubicacion">Dar mi ubicacion</button>
+        </div>
         `
         this.appendChild(div)
+
+
         const botonEl = div.querySelector(".btn-ubicacion")
         botonEl?.addEventListener("click", () => {
             navigator.geolocation.getCurrentPosition((e) => {

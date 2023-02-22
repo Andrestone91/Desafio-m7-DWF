@@ -10,6 +10,14 @@ export class MyData extends HTMLElement {
         const style = document.createElement("style")
         const cs = state.getState()
         style.textContent = `
+        .contenedor-principal {
+            width: 80%;
+            margin: auto;
+            display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+          }
         .title-welcome{
             font-size:40px;
         }
@@ -19,6 +27,7 @@ export class MyData extends HTMLElement {
         this.appendChild(style)
         div.innerHTML = `
         <header-custom></header-custom>
+        <div class="contenedor-principal">
         <h1 class="title-welcome">Mis Datos</h1>
         <h2>Nombre: ${cs.user.name}</h2>
         <h2>Email: ${cs.user.email}</h2>
@@ -26,7 +35,7 @@ export class MyData extends HTMLElement {
         <button class="btn-editar">Editar datos</button>
         <button class="btn-volver">Volver</button>
         <button class="btn-Logout">Cerrar sesión</button>
-    
+    </div>
         `
         this.appendChild(div)
         const botonEl = div.querySelector(".btn-editar")

@@ -10,6 +10,14 @@ export class LostPets extends HTMLElement {
         const style = document.createElement("style")
         const shadow = this.attachShadow({ mode: "open" })
         style.textContent = `
+        .contenedor-principal {
+            width: 80%;
+            margin: auto;
+            display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+          }
         .title-welcome{
             font-size:40px;
         }
@@ -30,6 +38,7 @@ export class LostPets extends HTMLElement {
 
         div.innerHTML = `
         <header-custom></header-custom>
+        <div class="contenedor-principal">
         <h1 class="title-welcome">Mascotas perdidas cerca tuyo</h1>
         <div>
         ${cs.algoliaData.map(data =>
@@ -48,6 +57,7 @@ export class LostPets extends HTMLElement {
               </div>
             </div>`
         )}
+        </div>
         </div>
         `
 
