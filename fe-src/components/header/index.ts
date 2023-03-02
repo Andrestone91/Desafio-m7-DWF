@@ -87,6 +87,7 @@ export class Header extends HTMLElement {
 
     const loginEl = document.querySelector(".login") as any
     const formCreateEl = document.querySelector(".formCreate") as any
+    const mapEl = document.querySelector(".contenedor-map") as any
     const botonEl = div.querySelector(".boton-menu")
     const botonCierreEl = div.querySelector(".boton-menu__cierre")
     const menuEl = div.querySelector(".ventana__contenido")?.children as any
@@ -102,6 +103,9 @@ export class Header extends HTMLElement {
       if (location.pathname == "/create-user") {
         formCreateEl.style.display = "none"
       }
+      if (location.pathname == "/new-report") {
+        mapEl.style.display = "none"
+      }
 
     })
     botonCierreEl?.addEventListener("click", () => {
@@ -111,6 +115,9 @@ export class Header extends HTMLElement {
       }
       if (location.pathname == "/create-user") {
         formCreateEl.style.display = "flex"
+      }
+      if (location.pathname == "/new-report") {
+        mapEl.style.display = "block"
       }
 
     })

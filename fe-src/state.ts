@@ -9,8 +9,8 @@ const state = {
             token: ""
         },
         myReports: [],
-        lng: -58.3146701,
-        lat: -34.7473963,
+        lng: "",
+        lat: "",
         algoliaData: [],
     },
     listeners: [],

@@ -67,8 +67,8 @@ export class MyReports extends HTMLElement {
                      <h2>${data.name}</h2>
                       <h2>${data.place}</h2>
                   </div>
-                 <div class="container__report"
-                     <h2>Editar</h2>
+                 <div class="container__report">
+                     <button class="${"btn-edit-" + data.id}">Editar</button>
                   </div>
               </div>
             </div>`
@@ -76,7 +76,13 @@ export class MyReports extends HTMLElement {
         </div>
         </div>
         `
+        let data = []
         shadow.appendChild(div)
+        const btnEditEl = div.querySelector(".btn-edit-13")
+        btnEditEl?.addEventListener("click", () => {
+            console.log("hola");
+
+        })
 
     }
 }

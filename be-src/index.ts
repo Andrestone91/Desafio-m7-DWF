@@ -4,7 +4,7 @@ import * as cors from "cors"
 import { index } from "./lib/algolia"
 import { User, Pet } from "./models"
 import { findOrCreateUser, tk, authMiddleware } from "./controllers/users-controller"
-import { createReport } from "./controllers/pest-controller"
+import { createReport, bodyToIndex } from "./controllers/pest-controller"
 //import { sequelize } from "./models/connec"
 //sequelize.sync({ force: true })
 
@@ -78,6 +78,13 @@ app.get("/me", authMiddleware, async (req, res) => {
     res.json(user)
 })
 
+//encontrar una mascota
+app.get("/me/find-pet/:id", authMiddleware, async (req, res) => {
+    const id = req.params.id
+    const pet = await Pet.findByPk(id)
+    res.json(pet)
+})
+
 //mis reportes
 app.get("/me/reports", authMiddleware, async (req, res) => {
     const pets = await Pet.findAll({
@@ -92,6 +99,20 @@ app.post("/report", authMiddleware, async (req, res) => {
     const { name, imgUrl, place, lat, lng } = req.body
     const pet = await createReport(name, imgUrl, place, lat, lng, req._user.id)
     res.json(pet)
+})
+
+//editar mascota
+app.put("/me/edit-pet/:id", authMiddleware, async (req, res) => {
+    const id = req.params.id
+    const pet = await Pet.update(req.body, {
+        where: {
+            id: id
+        }
+    })
+    const updateData = await Pet.findByPk(id)
+    const indexItem = bodyToIndex(updateData, id)
+    await index.saveObject(indexItem)
+    res.json({ message: "se actualizo: " + pet + " registro/s" })
 })
 
 app.get("*", (req, res) => {
