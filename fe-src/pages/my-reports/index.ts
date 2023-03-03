@@ -1,4 +1,5 @@
 import { state } from "../../state"
+import { Router } from "@vaadin/router"
 
 export class MyReports extends HTMLElement {
     connectedCallback() {
@@ -76,14 +77,18 @@ export class MyReports extends HTMLElement {
         </div>
         </div>
         `
-        let data = []
+
         shadow.appendChild(div)
-        const btnEditEl = div.querySelector(".btn-edit-13")
-        btnEditEl?.addEventListener("click", () => {
-            console.log("hola");
+        cs.myReports.map(data => {
+            const pet = ".btn-edit-" + data.id
+            const botonEditEl = div.querySelector(pet)
+            botonEditEl?.addEventListener("click", () => {
+                state.findPet(data.id, () => {
+                    Router.go("/edit")
+                })
 
+            })
         })
-
     }
 }
 customElements.define("myreport-page", MyReports)

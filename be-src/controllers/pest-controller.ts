@@ -62,3 +62,26 @@ export function bodyToIndex(body, id?) {
     }
     return respuesta
 }
+export async function editPet(body, id) {
+    const resImage = await cloudinary.uploader.upload(body.imgUrl, {
+        discard_original_filename: true,
+        resource_type: "image",
+        width: 1000,
+    })
+    const mod = {
+        name: body.name,
+        imgUrl: resImage.secure_url,
+        place: body.place,
+        lat: body.lat,
+        lng: body.lng
+    }
+    const pet = await Pet.update(mod, {
+        where: {
+            id
+        }
+    })
+    const updateData = await Pet.findByPk(id)
+    const indexItem = bodyToIndex(updateData, id)
+    await index.saveObject(indexItem)
+    return pet
+}

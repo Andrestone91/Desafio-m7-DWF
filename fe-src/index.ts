@@ -7,7 +7,15 @@ import "./pages/my-data"
 import "./pages/lost-pets"
 import "./pages/my-reports"
 import "./pages/report-pet"
+import "./pages/edit-pet"
 import "./pages/test-page"
 
 import "./components/header"
 import "../be-src/router"
+
+import { state } from "./state"
+function main() {
+    state.init()
+    state.initLocalStorage()
+}
+main()

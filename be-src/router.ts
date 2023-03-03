@@ -9,5 +9,6 @@ router.setRoutes([
     { path: '/lost-pets', component: 'lost-page' },
     { path: '/my-reports', component: 'myreport-page' },
     { path: '/new-report', component: 'report-pet' },
+    { path: '/edit', component: 'edit-pet' },
     { path: '/test', component: 'test-page' },
 ]);

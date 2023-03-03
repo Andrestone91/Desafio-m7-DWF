@@ -4,7 +4,7 @@ import * as cors from "cors"
 import { index } from "./lib/algolia"
 import { User, Pet } from "./models"
 import { findOrCreateUser, tk, authMiddleware } from "./controllers/users-controller"
-import { createReport, bodyToIndex } from "./controllers/pest-controller"
+import { createReport, bodyToIndex, editPet } from "./controllers/pest-controller"
 //import { sequelize } from "./models/connec"
 //sequelize.sync({ force: true })
 
@@ -104,14 +104,12 @@ app.post("/report", authMiddleware, async (req, res) => {
 //editar mascota
 app.put("/me/edit-pet/:id", authMiddleware, async (req, res) => {
     const id = req.params.id
-    const pet = await Pet.update(req.body, {
+    const pet = await Pet.update(editPet(req.body, id), {
         where: {
             id: id
         }
     })
-    const updateData = await Pet.findByPk(id)
-    const indexItem = bodyToIndex(updateData, id)
-    await index.saveObject(indexItem)
+
     res.json({ message: "se actualizo: " + pet + " registro/s" })
 })
 

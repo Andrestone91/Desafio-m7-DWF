@@ -12,8 +12,36 @@ const state = {
         lng: "",
         lat: "",
         algoliaData: [],
+        loadPet: []
     },
     listeners: [],
+
+    initLocalStorage() {
+        const lastLocalStorage = localStorage.getItem("data")
+        if (!lastLocalStorage) {
+            return;
+        } else {
+            const cs = this.getState()
+            state.setState(JSON.parse(lastLocalStorage))
+        }
+
+    },
+
+    init() {
+        const cs = this.getState()
+        const userOne = {
+            ...cs,
+            user: {
+                name: "loyd",
+                email: "loyd@gmail.com",
+                password: "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
+                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjc3ODQ2MTgwfQ.sTIHMDAuaYLSyYazIIuP3gXuHmVaOTEzqoPt_ruUl7Q"
+            }
+        }
+
+        localStorage.setItem("data", JSON.stringify(userOne))
+    },
+
     getState() {
         const data = this.data
         return data
@@ -23,6 +51,7 @@ const state = {
         for (const cb of this.listeners) {
             cb()
         }
+        localStorage.setItem("data", JSON.stringify(newState))
         console.log("el state a cambiado", this.data);
     },
     myLocation(lng, lat, callback?) {
@@ -129,6 +158,54 @@ const state = {
             return res.json()
         }).then(data => {
             console.log(data);
+        })
+    },
+
+    async findPet(id, callback?) {
+        const cs = this.getState()
+        const token = cs.user.token
+        const pet = await fetch(API_BASE_URL + "/me/find-pet/" + id, {
+            method: "get",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": "bearer " + token
+            },
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            //   console.log(data);
+            this.loadPet(data)
+        })
+
+        if (callback) {
+            callback()
+
+        }
+    },
+
+    loadPet(data) {
+        const cs = this.getState()
+        cs.loadPet = data
+        this.setState(cs)
+    },
+
+    async editPet(id, data, callback?) {
+        const cs = this.getState()
+        const token = cs.user.token
+        await fetch(API_BASE_URL + "/me/edit-pet/" + id, {
+            method: "put",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": "bearer " + token
+            },
+            body: JSON.stringify(data)
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            if (data) {
+                window.alert("actualizado, los cambios se demoran un momento en reflejarse")
+            }
+            callback()
         })
     },
 

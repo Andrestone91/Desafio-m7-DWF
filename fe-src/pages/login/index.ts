@@ -76,6 +76,9 @@ export class Login extends HTMLElement {
       const target = e.target as any;
       const email = target.email.value;
       const password = target.password.value;
+      if (!email || !password) {
+        return window.alert("faltan datos")
+      }
       state.signin(email, password, () => {
         if (cs.lng == "") {
           Router.go("/")
