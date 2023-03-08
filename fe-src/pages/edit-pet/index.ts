@@ -80,7 +80,7 @@ export class Edit extends HTMLElement {
           <input class="input-search" name="q" type="search" />
           <button name="place" class="search">Buscar</button>
           <div id="map" class="contenedor-map"></div>
-          <button>subir</button>
+          <button>Actualizar</button>
         </form>
         </div>
         `
@@ -191,7 +191,7 @@ export class Edit extends HTMLElement {
                             lng
                         }
                         state.editPet(data.id, mod, () => {
-                            Router.go("/my-reports")
+                            window.alert("se actualizaron los datos")
                         })
 
                     }

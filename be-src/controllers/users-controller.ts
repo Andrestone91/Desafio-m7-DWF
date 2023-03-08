@@ -56,3 +56,19 @@ export function authMiddleware(req, res, next) {
     }
 }
 
+export async function editUser(body, id) {
+    const mod = {
+        name: body.name,
+        email: body.email,
+    }
+    const user = await User.update(mod, {
+        where: { id: id }
+    })
+    const authMod = {
+        email: body.email,
+        password: getSHA256ofString(body.password),
+    }
+    const auth = await Auth.update(authMod, { where: { user_id: id } })
+
+    return [user, auth]
+}

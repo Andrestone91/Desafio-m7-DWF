@@ -145,8 +145,11 @@ export class Report extends HTMLElement {
                     const imgUrl = imagenDataURL
                     const place = target.q.value
                     //  console.log(name, imgUrl, place, lat, lng);
-
-                    state.newReport(name, imgUrl, place, lat, lng)
+                    if (!name || imgUrl == undefined || !place) {
+                        window.alert("se necesitan todos los datos")
+                    } else {
+                        state.newReport(name, imgUrl, place, lat, lng)
+                    }
                 })
 
 

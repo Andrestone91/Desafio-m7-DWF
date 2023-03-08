@@ -100,12 +100,13 @@ export class Header extends HTMLElement {
       if (location.pathname == "/login") {
         loginEl.style.display = "none"
       }
-      if (location.pathname == "/create-user") {
+      if (location.pathname == "/create-user" || location.pathname == "/edit-user") {
         formCreateEl.style.display = "none"
       }
-      if (location.pathname == "/new-report") {
+      if (location.pathname == "/new-report" || location.pathname == "/edit") {
         mapEl.style.display = "none"
       }
+
 
     })
     botonCierreEl?.addEventListener("click", () => {
@@ -113,10 +114,10 @@ export class Header extends HTMLElement {
       if (location.pathname == "/login") {
         loginEl.style.display = "flex"
       }
-      if (location.pathname == "/create-user") {
+      if (location.pathname == "/create-user" || location.pathname == "/edit-user") {
         formCreateEl.style.display = "flex"
       }
-      if (location.pathname == "/new-report") {
+      if (location.pathname == "/new-report" || location.pathname == "/edit") {
         mapEl.style.display = "block"
       }
 

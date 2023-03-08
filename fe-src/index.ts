@@ -3,6 +3,7 @@ dotenv.config()
 import "./pages/welcome"
 import "./pages/login"
 import "./pages/create-user"
+import "./pages/edit-user"
 import "./pages/my-data"
 import "./pages/lost-pets"
 import "./pages/my-reports"
@@ -18,4 +19,4 @@ function main() {
     state.init()
     state.initLocalStorage()
 }
-main()
+//main()

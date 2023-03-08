@@ -3,7 +3,7 @@ import * as path from "path"
 import * as cors from "cors"
 import { index } from "./lib/algolia"
 import { User, Pet } from "./models"
-import { findOrCreateUser, tk, authMiddleware } from "./controllers/users-controller"
+import { findOrCreateUser, tk, authMiddleware, editUser } from "./controllers/users-controller"
 import { createReport, bodyToIndex, editPet } from "./controllers/pest-controller"
 //import { sequelize } from "./models/connec"
 //sequelize.sync({ force: true })
@@ -62,6 +62,13 @@ app.post("/auth/token", async (req, res) => {
     }
 })
 
+//editar usuario
+app.put("/me/edit-user", authMiddleware, async (req, res) => {
+    const id = req._user.id
+    const user = await editUser(req.body, id)
+    res.json({ message: "se actualizo: " + user + " registro/s" })
+})
+
 //mascotas cerca
 app.get("/close-to-me", async (req, res) => {
     const { lat, lng } = req.query
@@ -104,11 +111,7 @@ app.post("/report", authMiddleware, async (req, res) => {
 //editar mascota
 app.put("/me/edit-pet/:id", authMiddleware, async (req, res) => {
     const id = req.params.id
-    const pet = await Pet.update(editPet(req.body, id), {
-        where: {
-            id: id
-        }
-    })
+    const pet = await editPet(req.body, id)
 
     res.json({ message: "se actualizo: " + pet + " registro/s" })
 })

@@ -203,10 +203,32 @@ const state = {
             return res.json()
         }).then(data => {
             if (data) {
-                window.alert("actualizado, los cambios se demoran un momento en reflejarse")
+                callback()
             }
-            callback()
         })
+    },
+
+    async editUser(body, callback?) {
+        const cs = this.getState()
+        const token = cs.user.token
+        await fetch(API_BASE_URL + "/me/edit-user", {
+            method: "put",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": "bearer " + token
+            },
+            body: JSON.stringify(body)
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            if (data.message) {
+                cs.user.name = body.name
+                cs.user.email = body.email
+                this.setState(cs)
+                callback()
+            }
+        })
+
     },
 
     suscribe(callback: (any) => any) {

@@ -40,7 +40,7 @@ export class MyData extends HTMLElement {
         this.appendChild(div)
         const botonEl = div.querySelector(".btn-editar")
         botonEl?.addEventListener("click", () => {
-
+            Router.go("/edit-user")
         })
         const botonVEl = div.querySelector(".btn-volver")
         botonVEl?.addEventListener("click", () => {
