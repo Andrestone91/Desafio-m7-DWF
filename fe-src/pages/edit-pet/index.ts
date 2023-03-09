@@ -58,6 +58,9 @@ export class Edit extends HTMLElement {
             width:350px;
             height:350px;
           }
+          .hidden{
+            display:none;
+        }
         `
         this.appendChild(style)
 
@@ -81,7 +84,18 @@ export class Edit extends HTMLElement {
           <button name="place" class="search">Buscar</button>
           <div id="map" class="contenedor-map"></div>
           <button>Actualizar</button>
-        </form>
+          </form>
+          <button class="delete">borrar</button>
+          <div class="hidden">
+          <iframe
+          src="https://giphy.com/embed/sSgvbe1m3n93G"
+          width="50"
+          height="50"
+          frameborder="0"
+          class="giphy-embed"
+          allowfullscreen>
+          </iframe>
+          </div>
         </div>
         `
 
@@ -174,14 +188,18 @@ export class Edit extends HTMLElement {
                 const [lng, lat]: any = firstResult.geometry.coordinates
 
                 const formEl = div.querySelector(".form")
+                const hidden = div.querySelector(".hidden") as any
                 formEl?.addEventListener("submit", (e) => {
                     e.preventDefault()
+                    if (hidden) {
+                        hidden.classList.remove("hidden")
+                    }
                     const target = e.target as any
                     const name = target.name.value
                     const imgUrl = imagenDataURL
                     const place = target.q.value
                     if (!name || imgUrl == undefined || !place) {
-                        window.alert("se necesitan todos los datos")
+                        return hidden.classList.add("hidden"), window.alert("se necesitan todos los datos")
                     } else {
                         const mod = {
                             name,
@@ -192,12 +210,29 @@ export class Edit extends HTMLElement {
                         }
                         state.editPet(data.id, mod, () => {
                             window.alert("se actualizaron los datos")
+                            state.myReports(() => {
+                                hidden.classList.add("hidden")
+                                Router.go("/my-reports")
+                            })
                         })
 
                     }
 
                 })
+                const borrarEl = div.querySelector(".delete")
+                borrarEl?.addEventListener("click", (e) => {
+                    e.preventDefault()
+                    // console.log(cs.myReports["name"]);
 
+                    state.deletePet(data.id, () => {
+                        window.alert("la mascota fue removido")
+                        state.myReports(() => {
+                            Router.go("/my-reports")
+                        })
+
+                    })
+
+                })
 
                 map.setCenter(firstResult.geometry.coordinates);
                 map.setZoom(14);

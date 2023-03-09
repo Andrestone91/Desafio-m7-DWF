@@ -133,18 +133,13 @@ const state = {
         }).then(res => {
             return res.json()
         }).then(data => {
-            if (data == "") {
-                console.log("no hay reportes")
-                callback()
-            } else {
-                cs.myReports = data
-                state.setState(cs)
-                callback()
-            }
+            cs.myReports = data
+            state.setState(cs)
+            callback()
         })
     },
 
-    async newReport(name, imgUrl, place, lat, lng) {
+    async newReport(name, imgUrl, place, lat, lng, callback?) {
         const cs = this.getState()
         const token = cs.user.token
         await fetch(API_BASE_URL + "/report", {
@@ -158,6 +153,7 @@ const state = {
             return res.json()
         }).then(data => {
             console.log(data);
+            callback()
         })
     },
 
@@ -206,6 +202,26 @@ const state = {
                 callback()
             }
         })
+    },
+
+    async deletePet(id, callback?) {
+        const cs = this.getState()
+        const token = cs.user.token
+        await fetch(API_BASE_URL + "/me/delete-pet/" + id, {
+            method: "delete",
+            headers: {
+                "content-type": "application/json",
+                "Authorization": "bearer " + token
+            },
+        }).then(res => {
+            return res.json()
+        }).then(data => {
+            console.log(data);
+            cs.loadPet = []
+            this.setState(cs)
+            callback()
+        })
+
     },
 
     async editUser(body, callback?) {

@@ -1,4 +1,5 @@
 import { state } from "../../state"
+import { Router } from "@vaadin/router"
 import Dropzone from "dropzone";
 import * as mapboxgl from "mapbox-gl";
 import * as MapboxClient from "mapbox";
@@ -55,6 +56,9 @@ export class Report extends HTMLElement {
             width:350px;
             height:350px;
           }
+          .hidden{
+            display:none;
+        }
         `
         this.appendChild(style)
 
@@ -79,6 +83,16 @@ export class Report extends HTMLElement {
           <div id="map" class="contenedor-map"></div>
           <button>subir</button>
         </form>
+        <div class="hidden">
+        <iframe
+        src="https://giphy.com/embed/sSgvbe1m3n93G"
+        width="50"
+        height="50"
+        frameborder="0"
+        class="giphy-embed"
+        allowfullscreen>
+        </iframe>
+        </div>
         </div>
         `
 
@@ -138,17 +152,27 @@ export class Report extends HTMLElement {
                 const [lng, lat]: any = firstResult.geometry.coordinates
 
                 const formEl = div.querySelector(".form")
+                const hidden = div.querySelector(".hidden") as any
                 formEl?.addEventListener("submit", (e) => {
                     e.preventDefault()
+                    if (hidden) {
+                        hidden.classList.remove("hidden")
+                    }
                     const target = e.target as any
                     const name = target.name.value
                     const imgUrl = imagenDataURL
                     const place = target.q.value
                     //  console.log(name, imgUrl, place, lat, lng);
                     if (!name || imgUrl == undefined || !place) {
-                        window.alert("se necesitan todos los datos")
+                        return hidden.classList.add("hidden"), window.alert("se necesitan todos los datos")
                     } else {
-                        state.newReport(name, imgUrl, place, lat, lng)
+                        state.newReport(name, imgUrl, place, lat, lng, () => {
+                            window.alert("la mascota fue publicada")
+                            state.myReports(() => {
+                                hidden.classList.add("hidden")
+                                Router.go("/my-reports")
+                            })
+                        })
                     }
                 })
 

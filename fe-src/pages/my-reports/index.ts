@@ -48,14 +48,19 @@ export class MyReports extends HTMLElement {
         `
         shadow.appendChild(style)
 
-
-
+        function noData() {
+            if (cs.myReports == "") {
+                return `<p>no hay datos</p>`
+            } else if (cs.myReports !== "") {
+                return "";
+            }
+        }
 
         div.innerHTML = `
         <header-custom></header-custom>
         <div class="contenedor-principal">
         <h1 class="title-welcome">Mis mascotas reportadas</h1>
-        
+        <h1>${noData()}</h1>
         
         <div>
         ${cs.myReports.map(data =>

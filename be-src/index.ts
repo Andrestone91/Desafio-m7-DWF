@@ -116,6 +116,19 @@ app.put("/me/edit-pet/:id", authMiddleware, async (req, res) => {
     res.json({ message: "se actualizo: " + pet + " registro/s" })
 })
 
+//borrar mascota
+app.delete("/me/delete-pet/:id", authMiddleware, async (req, res) => {
+    const id = req.params.id
+    const objectID = `${id}`
+    if (await Pet.findByPk(id)) {
+        Pet.destroy({ where: { id: id } })
+        await index.deleteObject(objectID)
+        res.json({ message: "diste de baja la busqueda de la mascota" })
+    } else {
+        res.json({ message: "no se encuentra la mascota" })
+    }
+})
+
 app.get("*", (req, res) => {
     const ruta = path.resolve(__dirname, "../fe-dist/index.html")
     res.sendFile(ruta)
