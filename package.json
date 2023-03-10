@@ -8,6 +8,7 @@
     "sync": "ts-node ./be-src/sync.ts"
   },
   "dependencies": {
+    "@sendgrid/mail": "^7.7.0",
     "@vaadin/router": "^1.7.4",
     "algoliasearch": "^4.14.3",
     "bulma": "^0.9.4",

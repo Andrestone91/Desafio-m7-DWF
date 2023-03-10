@@ -9,6 +9,7 @@ router.setRoutes([
     { path: '/my-user', component: 'data-page' },
     { path: '/lost-pets', component: 'lost-page' },
     { path: '/my-reports', component: 'myreport-page' },
+    { path: '/message', component: 'message-page' },
     { path: '/new-report', component: 'report-pet' },
     { path: '/edit', component: 'edit-pet' },
     { path: '/test', component: 'test-page' },

@@ -4,7 +4,7 @@ import * as cors from "cors"
 import { index } from "./lib/algolia"
 import { User, Pet } from "./models"
 import { findOrCreateUser, tk, authMiddleware, editUser } from "./controllers/users-controller"
-import { createReport, bodyToIndex, editPet } from "./controllers/pest-controller"
+import { createReport, editPet } from "./controllers/pest-controller"
 //import { sequelize } from "./models/connec"
 //sequelize.sync({ force: true })
 
@@ -86,9 +86,9 @@ app.get("/me", authMiddleware, async (req, res) => {
 })
 
 //encontrar una mascota
-app.get("/me/find-pet/:id", authMiddleware, async (req, res) => {
+app.get("/me/find-pet/:id", async (req, res) => {
     const id = req.params.id
-    const pet = await Pet.findByPk(id)
+    const pet = await Pet.findByPk(id, { include: [User] })
     res.json(pet)
 })
 

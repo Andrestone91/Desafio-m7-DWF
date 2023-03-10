@@ -1,3 +1,4 @@
+import { Router } from "@vaadin/router"
 import { state } from "../../state"
 
 export class LostPets extends HTMLElement {
@@ -68,7 +69,7 @@ export class LostPets extends HTMLElement {
                       <h2>${data.place}</h2>
                   </div>
                  <div class="container__report">
-                     <button>Reportar mascota</button>
+                 <button class="${"btn-edit-" + data.objectID}">Reportar mascota</button>
                   </div>
               </div>
             </div>`
@@ -76,7 +77,16 @@ export class LostPets extends HTMLElement {
         </div>
         </div>
         `
+        cs.algoliaData.map(data => {
+            const classBtnEl = ".btn-edit-" + data.objectID
+            const botonEl = div.querySelector(classBtnEl)
+            botonEl?.addEventListener("click", () => {
+                state.findPet(data.objectID, () => {
+                    Router.go("/message")
+                })
 
+            })
+        })
         shadow.appendChild(div)
     }
 }

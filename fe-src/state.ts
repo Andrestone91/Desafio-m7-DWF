@@ -12,7 +12,8 @@ const state = {
         lng: "",
         lat: "",
         algoliaData: [],
-        loadPet: []
+        loadPet: [],
+
     },
     listeners: [],
 
@@ -110,6 +111,7 @@ const state = {
         }).then(data => {
             if (data.message) {
                 window.alert("datos incorrectos")
+
             }
             else {
                 cs.user.name = data.user.name;
@@ -246,6 +248,8 @@ const state = {
         })
 
     },
+
+
 
     suscribe(callback: (any) => any) {
         this.listeners.push(callback)

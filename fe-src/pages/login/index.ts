@@ -30,6 +30,9 @@ export class Login extends HTMLElement {
         .title{
           font-size:24px;
         }
+        .hidden{
+          display:none;
+      }
         `
     this.appendChild(style)
     div.innerHTML = `
@@ -63,6 +66,16 @@ export class Login extends HTMLElement {
         </p>
       </div>
       </form>
+      <div class="hidden">
+        <iframe
+        src="https://giphy.com/embed/sSgvbe1m3n93G"
+        width="50"
+        height="50"
+        frameborder="0"
+        class="giphy-embed"
+        allowfullscreen>
+        </iframe>
+        </div>
       <h2>no tienes una cuenta?</h2>
       <a class="link__crear-cuenta" >crear cuenta</a>
     </div>
@@ -70,14 +83,18 @@ export class Login extends HTMLElement {
 
     //signin
     const form = div.querySelector(".form")
+    const hidden = div.querySelector(".hidden") as any
     form?.addEventListener("submit", (e) => {
       e.preventDefault()
+      if (hidden) {
+        hidden.classList.remove("hidden")
+      }
       const cs = state.getState();
       const target = e.target as any;
       const email = target.email.value;
       const password = target.password.value;
       if (!email || !password) {
-        return window.alert("faltan datos")
+        return hidden.classList.add("hidden"), window.alert("faltan datos")
       }
       state.signin(email, password, () => {
         if (cs.lng == "") {

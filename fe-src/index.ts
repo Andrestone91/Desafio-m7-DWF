@@ -8,6 +8,7 @@ import "./pages/my-data"
 import "./pages/lost-pets"
 import "./pages/my-reports"
 import "./pages/report-pet"
+import "./pages/message-report"
 import "./pages/edit-pet"
 import "./pages/test-page"
 

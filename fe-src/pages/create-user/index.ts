@@ -34,7 +34,7 @@ export class Create extends HTMLElement {
     div.innerHTML = `
     <header-custom></header-custom>
     <div class="formCreate">
-    <h1 class="title">crear cuenta</h1>
+    <h1 class="title">Nueva cuenta</h1>
         <form class="form box">
         <div class="field">
           <label class="label is-white">Nombre</label>
@@ -73,7 +73,7 @@ export class Create extends HTMLElement {
         <div class="field">
         <p class="control">
           <button class="button is-success is-fullwidth">
-            Guardar
+            Crear cuenta
           </button>
         </p>
       </div>
