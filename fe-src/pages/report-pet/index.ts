@@ -29,9 +29,10 @@ export class Report extends HTMLElement {
             align-items: center;
           }
        
-        .title-welcome{
-            font-size:40px;
-        }
+          .title-welcome {
+            font-size: 40px;
+            font-family: "Poppins", sans-serif;
+          }
         .container{
             width:365px;
             height:200px;
@@ -53,11 +54,21 @@ export class Report extends HTMLElement {
             justify-content: center;
         }*/
         .contenedor-map{
-            width:350px;
             height:350px;
           }
           .hidden{
             display:none;
+        }
+        .form__input,.input-search{
+            margin-bottom: 25px;
+            padding: 5px;
+            font-size: 15px;
+        }
+        .search,.btn-upload{
+            background: #5bff005c;
+            padding: 10px;
+            border: none;
+            margin: 20px 0;
         }
         `
         this.appendChild(style)
@@ -70,18 +81,18 @@ export class Report extends HTMLElement {
           <h1 class="title-welcome">Reportar mascota perdida</h1>
         
         <form class="form">
-          <label>Nombre de la mascota</label>
-             <input name="name" class="form__input" type="text" placeholder="Buki">
-         <label>foto</label>
+          <label>NOMBRE DE LA MASCOTA</label>
+             <input name="name" class="form__input" type="text" placeholder="Perrito malvado">
+         <label>FOTO</label>
               <div class="profile-picture-container">
                
                   <h3 class="profile-picture-button">arrastra la foto aqui</h3>
                </div>
-          <label>lugar</label>
-          <input class="input-search" name="q" type="search" />
+          <label>LUGAR</label>
+          <input class="input-search" name="q" type="search" placeholder="Quilmes" />
           <button name="place" class="search">Buscar</button>
           <div id="map" class="contenedor-map"></div>
-          <button>subir</button>
+          <button class="btn-upload">subir</button>
         </form>
         <div class="hidden">
         <iframe
@@ -106,6 +117,11 @@ export class Report extends HTMLElement {
         })
         myDropzone.on("thumbnail", function (file) {
             imagenDataURL = file.dataURL
+            document.querySelector(".dz-error-mark")?.remove();
+            document.querySelector(".dz-success-mark")?.remove();
+            document.querySelector(".dz-error-message")?.remove();
+            document.querySelector(".dz-progress")?.remove();
+            document.querySelector(".dz-details")?.remove();
         });
 
         function initMap() {

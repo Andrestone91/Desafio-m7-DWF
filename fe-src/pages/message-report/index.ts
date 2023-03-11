@@ -2,14 +2,14 @@ import { Router } from "@vaadin/router"
 import { state } from "../../state"
 
 export class Message extends HTMLElement {
-    connectedCallback() {
-        this.render()
-    }
-    render() {
-        const cs = state.getState()
-        const div = document.createElement("div")
-        const style = document.createElement("style")
-        style.textContent = `
+  connectedCallback() {
+    this.render()
+  }
+  render() {
+    const cs = state.getState()
+    const div = document.createElement("div")
+    const style = document.createElement("style")
+    style.textContent = `
         .contenedor-principal {
             width: 80%;
             margin: auto;
@@ -22,9 +22,10 @@ export class Message extends HTMLElement {
             display:flex;
             flex-direction:column;
           }
-        .title-welcome{
-            font-size:40px;
-        }
+          .title-welcome {
+            font-size: 40px;
+            font-family: "Poppins", sans-serif;
+          }
       .input{
         width:350px;
         margin-bottom: 25px;
@@ -36,12 +37,17 @@ export class Message extends HTMLElement {
             padding:5px;
             font-size: 17px;
         }
+        .btn{
+          background: #5bff005c;
+    padding: 10px;
+    border: none;
+        }
         `
-        this.appendChild(style)
+    this.appendChild(style)
 
-        const email = cs.loadPet.User.email
+    const email = cs.loadPet.User.email
 
-        div.innerHTML = `
+    div.innerHTML = `
         <header-custom></header-custom>
         <div class="contenedor-principal">
         <h1 class="title-welcome">Reportar info de ${cs.loadPet.name}</h1>
@@ -57,12 +63,12 @@ export class Message extends HTMLElement {
         <input type="hidden" name="_next" value="http://localhost:1234">
         <input type="hidden" name="_subject" value="Novedades de su mascota">
         <input type="hidden" name="_captcha" value="false">
-        <button type="submit">Enviar</button>
+        <button  class="btn"type="submit">Enviar</button>
         </form>
         </div>
         `
-        this.appendChild(div)
+    this.appendChild(div)
 
-    }
+  }
 }
 customElements.define("message-page", Message)

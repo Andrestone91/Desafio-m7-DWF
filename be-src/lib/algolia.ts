@@ -2,7 +2,8 @@ import algoliasearch from 'algoliasearch';
 
 // For the search only version
 // import algoliasearch from 'algoliasearch/lite';
-
-const client = algoliasearch('TZQ6GRJNQY', '7e8474ccf739342b1335a65aa017d1f3');
+const clientTKa = process.env.ALGOLIA_API_A
+const clientTKb = process.env.ALGOLIA_API_B
+const client = algoliasearch(clientTKa, clientTKb);
 const index = client.initIndex('pets');
 export { index }

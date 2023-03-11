@@ -17,7 +17,7 @@ import "../be-src/router"
 
 import { state } from "./state"
 function main() {
-    state.init()
-    state.initLocalStorage()
+    // state.init()
+    // state.initLocalStorage()
 }
-//main()
+main()

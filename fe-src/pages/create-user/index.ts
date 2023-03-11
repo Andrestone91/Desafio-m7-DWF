@@ -29,6 +29,9 @@ export class Create extends HTMLElement {
       .title{
         font-size:24px;
       }
+      .hidden{
+        display:none;
+    }
         `
     this.appendChild(style)
     div.innerHTML = `
@@ -78,14 +81,27 @@ export class Create extends HTMLElement {
         </p>
       </div>
       </form>
-   
+      <div class="hidden">
+      <iframe
+      src="https://giphy.com/embed/sSgvbe1m3n93G"
+      width="50"
+      height="50"
+      frameborder="0"
+      class="giphy-embed"
+      allowfullscreen>
+      </iframe>
+      </div>
     </div>
         `
 
 
     const form = div.querySelector(".form")
+    const hidden = div.querySelector(".hidden") as any
     form?.addEventListener("submit", (e) => {
       e.preventDefault()
+      if (hidden) {
+        hidden.classList.remove("hidden")
+      }
       const cs = state.getState()
       const target = e.target as any;
       const nombre = target.nombre.value;
@@ -93,7 +109,7 @@ export class Create extends HTMLElement {
       const password = target.password.value
       const repeatPassword = target.repeatPassword.value
       if (password !== repeatPassword) {
-        window.alert("la contraseña tiene que coincidir")
+        return hidden.classList.add("hidden"), window.alert("la contraseña tiene que coincidir")
       }
       if (password == repeatPassword) {
         state.signUp(nombre, email, password, () => {
@@ -106,6 +122,8 @@ export class Create extends HTMLElement {
               Router.go("/lost-pets")
             }
           })
+        }, () => {
+          hidden.classList.add("hidden")
         })
       }
     })

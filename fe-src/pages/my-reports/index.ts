@@ -21,9 +21,10 @@ export class MyReports extends HTMLElement {
     justify-content: center;
     align-items: center;
           }
-        .title-welcome{
-            font-size:40px;
-        }
+          .title-welcome {
+            font-size: 40px;
+            font-family: "Poppins", sans-serif;
+          }
         .container{
             width:365px;
             height:250px;
@@ -45,6 +46,16 @@ export class MyReports extends HTMLElement {
             justify-content: space-around;
             align-items: center;
         }
+        .text-info{
+            margin:10px;
+            font-family: 'Poppins', sans-serif;
+        }
+        .btn{
+            background: #5bff005c;
+            padding: 10px;
+            border: none;
+        }
+       
         `
         shadow.appendChild(style)
 
@@ -70,11 +81,11 @@ export class MyReports extends HTMLElement {
                  </div>
               <div class="separar">
                   <div class="container__info">
-                     <h2>${data.name}</h2>
-                      <h2>${data.place}</h2>
+                     <h2 class="text-info">${data.name}</h2>
+                      <h2 class="text-info">${data.place}</h2>
                   </div>
                  <div class="container__report">
-                     <button class="${"btn-edit-" + data.id}">Editar</button>
+                     <button class="${"btn-edit-" + data.id} btn">Editar</button>
                   </div>
               </div>
             </div>`

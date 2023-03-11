@@ -33,10 +33,10 @@ const state = {
         const userOne = {
             ...cs,
             user: {
-                name: "loyd",
-                email: "loyd@gmail.com",
+                name: "andres",
+                email: "andrestone9191@gmail.com",
                 password: "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
-                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjc3ODQ2MTgwfQ.sTIHMDAuaYLSyYazIIuP3gXuHmVaOTEzqoPt_ruUl7Q"
+                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc4NTUyOTQ2fQ.ls3WhOf6yVpCxgkD166QN3aONnVv4uOLpV_yfSpVQFM"
             }
         }
 
@@ -78,7 +78,7 @@ const state = {
         })
     },
 
-    async signUp(name, email, password, callback) {
+    async signUp(name, email, password, callback, error?) {
         await fetch(API_BASE_URL + "/auth", {
             method: "post",
             headers: {
@@ -91,6 +91,7 @@ const state = {
             console.log("postgreSQL", data);
             if (data.error) {
                 window.alert("el email ya esta registrado")
+                error()
             }
             else {
                 callback()
@@ -98,7 +99,7 @@ const state = {
         })
     },
 
-    async signin(email, password, callback) {
+    async signin(email, password, callback, error?) {
         const cs = this.getState()
         await fetch(API_BASE_URL + "/auth/token", {
             method: "post",
@@ -111,7 +112,7 @@ const state = {
         }).then(data => {
             if (data.message) {
                 window.alert("datos incorrectos")
-
+                error()
             }
             else {
                 cs.user.name = data.user.name;

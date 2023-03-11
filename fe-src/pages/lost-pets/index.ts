@@ -19,9 +19,10 @@ export class LostPets extends HTMLElement {
             justify-content: center;
             align-items: center;
           }
-        .title-welcome{
-            font-size:40px;
-        }
+          .title-welcome {
+            font-size: 40px;
+            font-family: "Poppins", sans-serif;
+          }
         .img-pets{
             width: 100%;
             object-fit: cover;
@@ -40,6 +41,17 @@ export class LostPets extends HTMLElement {
             display:flex;
             justify-content: space-around;
             align-items: center;
+        }
+        .container__info{
+            font-family: 'Poppins', sans-serif;
+        }
+        .text-info{
+            margin:10px;
+        }
+        .btn{
+            background: #5bff005c;
+            padding: 10px;
+            border: none;
         }
         `
         shadow.appendChild(style)
@@ -65,11 +77,11 @@ export class LostPets extends HTMLElement {
                  </div>
               <div class="separar">
                   <div class="container__info">
-                     <h2>${data.name}</h2>
-                      <h2>${data.place}</h2>
+                     <h2 class="text-info">${data.name}</h2>
+                      <h2 class="text-info">${data.place}</h2>
                   </div>
                  <div class="container__report">
-                 <button class="${"btn-edit-" + data.objectID}">Reportar mascota</button>
+                 <button class="${"btn-edit-" + data.objectID} btn">Reportar mascota</button>
                   </div>
               </div>
             </div>`

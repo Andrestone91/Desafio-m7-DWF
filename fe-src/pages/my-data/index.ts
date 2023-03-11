@@ -14,28 +14,43 @@ export class MyData extends HTMLElement {
             width: 80%;
             margin: auto;
             display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
           }
-        .title-welcome{
-            font-size:40px;
-        }
-        .btn-ubicacion{
-        }
+          .title-welcome {
+            font-size: 40px;
+            font-family: "Poppins", sans-serif;
+          }
+       .text-data{
+        font-family: 'Roboto', sans-serif;
+       }
+       .btn-editar,
+       .btn-volver,
+       .btn-Logout{
+        background: #5bff005c;
+        padding: 10px;
+        border: none;
+        width: 100px;
+        margin-bottom: 10px;
+    }
+       }
         `
         this.appendChild(style)
         div.innerHTML = `
         <header-custom></header-custom>
-        <div class="contenedor-principal">
-        <h1 class="title-welcome">Mis Datos</h1>
-        <h2>Nombre: ${cs.user.name}</h2>
-        <h2>Email: ${cs.user.email}</h2>
-        <h2>contraseña: ****</h2>
-        <button class="btn-editar">Editar datos</button>
-        <button class="btn-volver">Volver</button>
-        <button class="btn-Logout">Cerrar sesión</button>
-    </div>
+         <div class="contenedor-principal">
+             <h1 class="title-welcome">Mis Datos</h1>
+        <div>
+             <h2 class="text-data">Nombre: ${cs.user.name}</h2>
+             <h2 class="text-data">Email: ${cs.user.email}</h2>
+              <h2 class="text-data">contraseña: ****</h2>
+              </div>
+              <button class="btn-editar">Editar datos</button>
+              <button class="btn-volver">Volver</button>
+              <button class="btn-Logout">Cerrar sesión</button>
+
+           </div>
         `
         this.appendChild(div)
         const botonEl = div.querySelector(".btn-editar")

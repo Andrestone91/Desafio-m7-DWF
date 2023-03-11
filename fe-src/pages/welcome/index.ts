@@ -9,6 +9,7 @@ export class Welcome extends HTMLElement {
         const div = document.createElement("div")
         const style = document.createElement("style")
         style.textContent = `
+      
         .contenedor-principal {
             width: 80%;
             margin: auto;
@@ -16,12 +17,18 @@ export class Welcome extends HTMLElement {
             flex-direction: column;
             justify-content: center;
             align-items: center;
+         
           }
         .title-welcome{
             font-size:40px;
+            font-family: 'Poppins', sans-serif;
         }
         .btn-ubicacion{
+            background: #5bff005c;
+            padding: 10px;
+            border: none;
         }
+        
         `
         this.appendChild(style)
         div.innerHTML = `
@@ -45,6 +52,7 @@ export class Welcome extends HTMLElement {
                 })
             })
         })
+
     }
 }
 customElements.define("welcome-page", Welcome)

@@ -31,9 +31,10 @@ export class Edit extends HTMLElement {
             align-items: center;
           }
        
-        .title-welcome{
-            font-size:40px;
-        }
+          .title-welcome {
+            font-size: 40px;
+            font-family: "Poppins", sans-serif;
+          }
         .container{
             width:365px;
             height:200px;
@@ -55,11 +56,26 @@ export class Edit extends HTMLElement {
             justify-content: center;
         }*/
         .contenedor-map{
-            width:350px;
-            height:350px;
+                      height:350px;
           }
           .hidden{
             display:none;
+        }
+        .form__input,.input-search{
+            margin-bottom: 25px;
+            padding: 5px;
+            font-size: 15px;
+        }
+        .search,.btn-upload,.delete{
+            background: #5bff005c;
+            padding: 10px;
+            border: none;
+            margin: 20px 0;
+        }
+        .delete{
+            width: 100%;
+            background: #fe8c89;
+            color: ghostwhite;
         }
         `
         this.appendChild(style)
@@ -72,20 +88,20 @@ export class Edit extends HTMLElement {
           <h1 class="title-welcome">Editar mascota perdida</h1>
         
         <form class="form">
-          <label>Nombre de la mascota</label>
-             <input name="name" class="form__input" type="text" placeholder="Buki">
-         <label>foto</label>
+          <label>NOMBRE DE LA MASCOTA</label>
+             <input name="name" class="form__input" type="text" placeholder="Perrito malvado">
+         <label>FOTO</label>
               <div class="profile-picture-container">
               <h3 class="profile-picture-button">arrastra la foto aqui</h3>
            <!--   <img class="profile-picture" width="120" height="120" /> --!>
                </div>
-          <label>lugar</label>
-          <input class="input-search" name="q" type="search" />
+          <label>LUGAR</label>
+          <input class="input-search" name="q" type="search" placeholder="Lanus"/>
           <button name="place" class="search">Buscar</button>
           <div id="map" class="contenedor-map"></div>
-          <button>Actualizar</button>
+          <button class="btn-upload">Actualizar</button>
           </form>
-          <button class="delete">borrar</button>
+          <button class="delete">Borrar publicacion</button>
           <div class="hidden">
           <iframe
           src="https://giphy.com/embed/sSgvbe1m3n93G"

@@ -103,6 +103,9 @@ export class Login extends HTMLElement {
         if (cs.lng !== "") {
           Router.go("/lost-pets")
         }
+      }, () => {
+
+        hidden.classList.add("hidden")
       })
     })
 

@@ -17,24 +17,6 @@ app.use(express.json({
 
 app.use(cors())
 
-//test
-app.get("/test", async (req, res) => {
-    await index.saveObject({
-        objectID: 1000,
-        name: "mascota 1",
-        location: "Quilmes Oeste",
-        imgUrl: "1234",
-        _geoloc: {
-            lat: -34.743690,
-            lng: -58.306064
-        }
-    }).then(res => {
-        console.log(res);
-    }).catch(e => {
-        console.log(e);
-    })
-    res.json({ funciona: "ok" })
-})
 
 //signup
 app.post("/auth", async (req, res) => {
