@@ -5,6 +5,10 @@
   "scripts": {
     "dev:fe": "parcel serve ./fe-src/index.html",
     "dev:be": "nodemon --watch ./be-src/**/*.ts  --exec ts-node ./be-src/dev.ts",
+    "build:fe": "parcel build ./fe-src/index.html",
+    "build:be": "tsc",
+    "build": "yarn build:fe && yarn build:be",
+    "start": "node ./be-dist/index.js",
     "sync": "ts-node ./be-src/sync.ts"
   },
   "dependencies": {

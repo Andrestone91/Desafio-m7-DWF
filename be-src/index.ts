@@ -110,9 +110,9 @@ app.delete("/me/delete-pet/:id", authMiddleware, async (req, res) => {
         res.json({ message: "no se encuentra la mascota" })
     }
 })
-
+app.use(express.static("dist"));
 app.get("*", (req, res) => {
-    const ruta = path.resolve(__dirname, "../fe-dist/index.html")
+    const ruta = path.resolve(__dirname, "../dist/index.html")
     res.sendFile(ruta)
 })
 
