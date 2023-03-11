@@ -101,7 +101,6 @@ export class Edit extends HTMLElement {
           <div id="map" class="contenedor-map"></div>
           <button class="btn-upload">Actualizar</button>
           </form>
-          <button class="delete">Borrar publicacion</button>
           <div class="hidden">
           <iframe
           src="https://giphy.com/embed/sSgvbe1m3n93G"
@@ -112,6 +111,7 @@ export class Edit extends HTMLElement {
           allowfullscreen>
           </iframe>
           </div>
+          <button class="delete">Borrar publicacion</button>
         </div>
         `
 

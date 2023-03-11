@@ -56,7 +56,7 @@ app.get("/close-to-me", async (req, res) => {
     const { lat, lng } = req.query
     const { hits }: any = await index.search("", {
         aroundLatLng: [lat, lng].join(","),
-        aroundRadius: 5000
+        aroundRadius: 10000
     })
     res.json(hits)
 })
