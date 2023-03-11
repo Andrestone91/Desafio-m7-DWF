@@ -10,7 +10,7 @@ import "./pages/my-reports"
 import "./pages/report-pet"
 import "./pages/message-report"
 import "./pages/edit-pet"
-import "./pages/test-page"
+//import "./pages/test-page"
 
 import "./components/header"
 import "../be-src/router"

@@ -1,4 +1,5 @@
-const API_BASE_URL = "http://localhost:3000"
+//const API_BASE_URL = "http://localhost:3000"
+const API_BASE_URL = "https://mascotas-perdidas.onrender.com"
 
 const state = {
     data: {
@@ -33,10 +34,10 @@ const state = {
         const userOne = {
             ...cs,
             user: {
-                name: "andres",
-                email: "andrestone9191@gmail.com",
-                password: "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b",
-                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc4NTUyOTQ2fQ.ls3WhOf6yVpCxgkD166QN3aONnVv4uOLpV_yfSpVQFM"
+                name: "",
+                email: "",
+                password: "",
+                token: ""
             }
         }
 
