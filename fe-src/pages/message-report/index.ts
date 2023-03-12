@@ -60,7 +60,7 @@ export class Message extends HTMLElement {
         <label>¿DÓNDE LO VISTE?</label>
         <textarea type="text" name="mensaje" class="input textarea" cols="30" rows="10" required></textarea>
         
-        <input type="hidden" name="_next" value="http://localhost:1234">
+        <input type="hidden" name="_next" value="https://mascotas-perdidas.onrender.com/">
         <input type="hidden" name="_subject" value="Novedades de su mascota">
         <input type="hidden" name="_captcha" value="false">
         <button  class="btn"type="submit">Enviar</button>
