@@ -6,6 +6,7 @@ router.setRoutes([
     { path: '/login', component: 'login-page' },
     { path: '/create-user', component: 'create-page' },
     { path: '/edit-user', component: 'edit-user' },
+    { path: '/new-password', component: 'edit-password-user' },
     { path: '/my-user', component: 'data-page' },
     { path: '/lost-pets', component: 'lost-page' },
     { path: '/my-reports', component: 'myreport-page' },

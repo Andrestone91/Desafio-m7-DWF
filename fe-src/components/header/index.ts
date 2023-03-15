@@ -137,7 +137,7 @@ export class Header extends HTMLElement {
       if (location.pathname == "/login") {
         loginEl.style.display = "none"
       }
-      if (location.pathname == "/create-user" || location.pathname == "/edit-user") {
+      if (location.pathname == "/create-user" || location.pathname == "/edit-user" || location.pathname == "/new-password") {
         formCreateEl.style.display = "none"
       }
       if (location.pathname == "/new-report" || location.pathname == "/edit") {
@@ -151,7 +151,7 @@ export class Header extends HTMLElement {
       if (location.pathname == "/login") {
         loginEl.style.display = "flex"
       }
-      if (location.pathname == "/create-user" || location.pathname == "/edit-user") {
+      if (location.pathname == "/create-user" || location.pathname == "/edit-user" || location.pathname == "/new-password") {
         formCreateEl.style.display = "flex"
       }
       if (location.pathname == "/new-report" || location.pathname == "/edit") {

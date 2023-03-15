@@ -1,4 +1,4 @@
-import { Router } from "@vaadin/router"
+import { PreventResult, Router } from "@vaadin/router"
 import { state } from "../../state"
 
 export class Message extends HTMLElement {
@@ -45,28 +45,38 @@ export class Message extends HTMLElement {
         `
     this.appendChild(style)
 
-    const email = cs.loadPet.User.email
+    // const email = cs.loadPet.User.email
 
     div.innerHTML = `
         <header-custom></header-custom>
         <div class="contenedor-principal">
         <h1 class="title-welcome">Reportar info de ${cs.loadPet.name}</h1>
 
-        <form class="form" action="https://formsubmit.co/${email}" method="POST">
+      <!--  <form class="form" action="https://formsubmit.co/" method="POST">-->
+
+        <form class="form" >
         <label>NOMBRE</label>
         <input  type="text"name="nombre" class="input" required>
         <label>TELEFONO</label>
         <input type="number" name="telefono" class="input" required>
         <label>¿DÓNDE LO VISTE?</label>
         <textarea type="text" name="mensaje" class="input textarea" cols="30" rows="10" required></textarea>
-        
+        <!--
         <input type="hidden" name="_next" value="https://mascotas-perdidas.onrender.com/">
         <input type="hidden" name="_subject" value="Novedades de su mascota">
         <input type="hidden" name="_captcha" value="false">
+        -->
         <button  class="btn"type="submit">Enviar</button>
         </form>
         </div>
         `
+
+    const formEl = div.querySelector(".form")
+    formEl?.addEventListener("submit", (e) => {
+      e.preventDefault()
+      window.alert("mensaje enviado")
+      Router.go("/lost-pets")
+    })
     this.appendChild(div)
 
   }

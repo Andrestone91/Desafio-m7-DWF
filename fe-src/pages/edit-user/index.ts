@@ -20,7 +20,7 @@ export class EditUser extends HTMLElement {
         }
         .form{
             width:300px;
-            height:500px;
+      
             padding:30px;
           background-color:hsl(48, 100%, 96%);
           border-radius:30px;
@@ -42,7 +42,7 @@ export class EditUser extends HTMLElement {
         <div class="field">
           <label class="label is-white">Nombre</label>
           <p class="control has-icons-left">
-            <input class="input is-rounded" type="text" placeholder="tu nombre" name="nombre"/>
+            <input class="input is-rounded" type="text" placeholder="Nuevo nombre" name="nombre"/>
             <span class="icon is-small is-left">
               <i class="fas fa-user"></i>
             </span>
@@ -51,48 +51,20 @@ export class EditUser extends HTMLElement {
         <div class="field">
           <label class="label is-white">Email</label>
           <p class="control has-icons-left">
-            <input class="input is-rounded" type="email" placeholder="ingresa un email" name="email"/>
+            <input class="input is-rounded" type="email" placeholder="Cambiar email" name="email"/>
             <span class="icon is-small is-left">
               <i class="fas fa-envelope"></i>
             </span>
           </p>
         </div>
 
-      <!-- 
-       <div class="field">
-        <label class="label">Contraseña Actual</label>
-        <p class="control has-icons-left">
-          <input class="input is-rounded" type="password" placeholder="actual" name="password"/>
-          <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
-          </span>
-        </p>
-        </div>
--->
-
-        <div class="field">
-          <label class="label">Contraseña actual o nueva</label>
-          <p class="control has-icons-left">
-            <input class="input is-rounded" type="password" placeholder="ingrese la contraseña" name="password"/>
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-          <label class="label">Repetir Contraseña</label>
-          <p class="control has-icons-left">
-            <input class="input is-rounded" type="password" placeholder="Repite la contraseña" name="repeatPassword"/>
-            <span class="icon is-small is-left">
-              <i class="fas fa-lock"></i>
-            </span>
-          </p>
-        </div>
         <div class="field">
         <p class="control">
           <button class="button is-success is-fullwidth">
             Guardar
           </button>
           <button class="button button-cancelar is-success is-fullwidth">
-            Cancelar
+            Volver
           </button>
           </p>
           </div>
@@ -109,33 +81,29 @@ export class EditUser extends HTMLElement {
     }
 
     pullUser()
-    // const form = div.querySelector(".form")
     form?.addEventListener("submit", (e) => {
       e.preventDefault()
-      const cs = state.getState()
+
       const target = e.target as any;
       const nombre = target.nombre.value;
       const email = target.email.value;
-      const password = target.password.value
-      const repeatPassword = target.repeatPassword.value
-      if (!password || !email || !nombre || !repeatPassword) {
-        window.alert("se necesitan todos los datos")
-      }
-      if (password !== repeatPassword) {
-        window.alert("la contraseña tiene que coincidir")
-      }
-      if (password !== "") {
-        if (password == repeatPassword) {
 
-          const data = {
-            name: nombre,
-            email: email,
-            password: password
-          }
-          state.editUser(data, () => {
-            window.alert("los datos fueron actualizados")
-          })
+
+      if (!email || !nombre) {
+        return window.alert("se necesitan todos los datos")
+      }
+      else if (nombre && email) {
+
+        const data = {
+          name: nombre,
+          email: email
+
         }
+        state.editUser(data, () => {
+          window.alert("los datos fueron actualizados")
+        })
+
+
 
       }
     })

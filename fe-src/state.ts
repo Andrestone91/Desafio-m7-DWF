@@ -1,5 +1,5 @@
-//const API_BASE_URL = "http://localhost:3000"
-const API_BASE_URL = "https://mascotas-perdidas.onrender.com"
+const API_BASE_URL = "http://localhost:3005"
+//const API_BASE_URL = "https://mascotas-perdidas.onrender.com"
 
 const state = {
     data: {
@@ -242,9 +242,11 @@ const state = {
             return res.json()
         }).then(data => {
             if (data.message) {
-                cs.user.name = body.name
-                cs.user.email = body.email
-                this.setState(cs)
+                if (body.name) {
+                    cs.user.name = body.name
+                    cs.user.email = body.email
+                    this.setState(cs)
+                }
                 callback()
             }
         })

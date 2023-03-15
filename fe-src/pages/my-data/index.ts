@@ -26,6 +26,7 @@ export class MyData extends HTMLElement {
         font-family: 'Roboto', sans-serif;
        }
        .btn-editar,
+       .btn-password,
        .btn-volver,
        .btn-Logout{
         background: #5bff005c;
@@ -46,9 +47,10 @@ export class MyData extends HTMLElement {
              <h2 class="text-data">Email: ${cs.user.email}</h2>
               <h2 class="text-data">contraseña: ****</h2>
               </div>
-              <button class="btn-editar">Editar datos</button>
+              <button class="btn-editar">Editar Datos</button>
+              <button class="btn-password">Cambiar Contraseña</button>
               <button class="btn-volver">Volver</button>
-              <button class="btn-Logout">Cerrar sesión</button>
+              <button class="btn-Logout">Cerrar Sesión</button>
 
            </div>
         `
@@ -56,6 +58,10 @@ export class MyData extends HTMLElement {
         const botonEl = div.querySelector(".btn-editar")
         botonEl?.addEventListener("click", () => {
             Router.go("/edit-user")
+        })
+        const btnPasswordEl = div.querySelector(".btn-password")
+        btnPasswordEl?.addEventListener("click", () => {
+            Router.go("/new-password")
         })
         const botonVEl = div.querySelector(".btn-volver")
         botonVEl?.addEventListener("click", () => {
